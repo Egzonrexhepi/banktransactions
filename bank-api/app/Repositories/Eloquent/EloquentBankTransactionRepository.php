@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Repositories\Eloquent;
+
+use App\BankTransaction;
+use App\Repositories\Contracts\BankTransactionRepository;
+
+use Kurt\Repoist\Repositories\Eloquent\AbstractRepository;
+
+class EloquentBankTransactionRepository extends AbstractRepository implements BankTransactionRepository
+{
+    public function entity()
+    {
+        return BankTransaction::class;
+    }
+}

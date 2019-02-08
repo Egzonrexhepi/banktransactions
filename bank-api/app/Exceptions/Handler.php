@@ -3,7 +3,12 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\UnauthorizedException;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -46,6 +51,34 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception instanceof NotFoundHttpException)
+        {
+            return response()->json([
+                'success' => false,
+                'message' => 'Resource not found'
+            ], 404);
+        }
+
+        if ($exception instanceof AuthorizationException || $exception instanceof UnauthorizedException) {
+            return response()->json([
+                'message' => 'Unauthorized'
+            ],401);
+        }
+
+        if ($exception instanceof MethodNotAllowedHttpException)
+        {
+            return response()->json([
+                'success' => false,
+                'message' => 'Http method not allowed'
+            ], 405);
+        }
+
+        if($exception instanceOf ValidationException) {
+            return response()->json([
+                'success' => false,
+                'errors' =>$exception->errors()
+            ], 400);
+        }
         return parent::render($request, $exception);
     }
 }

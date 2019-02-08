@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('swagger', [
+    'as' => 'bank-api.swagger',
+    'uses' => '\L5Swagger\Http\Controllers\SwaggerController@api',
+]);
