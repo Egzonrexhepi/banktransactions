@@ -1,0 +1,320 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Bank swagger API",
+        "description": "Bank API description",
+        "contact": {
+            "email": "e.rexhepi2@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "host": "http://my-default-host.com",
+    "basePath": "/api",
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "paths": {
+        "/authenticate": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Authenticate",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "RegisterRequest",
+                        "in": "body",
+                        "description": "Parameters",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/RegisterRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/RegisterResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": {
+                    "oauth2_security_example": [
+                        "write:app",
+                        "read:app"
+                    ]
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": [
+                    "Authentication"
+                ],
+                "summary": "Authenticate",
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "LoginRequest",
+                        "in": "body",
+                        "description": "Parameters",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/LoginRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/LoginResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": {
+                    "oauth2_security_example": [
+                        "write:app",
+                        "read:app"
+                    ]
+                }
+            }
+        },
+        "/transaction": {
+            "post": {
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Transactions",
+                "description": "Transaction endpoints",
+                "parameters": [
+                    {
+                        "name": "CreateTransactionRequest",
+                        "in": "body",
+                        "description": "Parameters",
+                        "required": true,
+                        "schema": {
+                            "type": "object",
+                            "$ref": "#/definitions/CreateTransactionRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/CreateTransactionResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": {
+                    "oauth2_security_example": [
+                        "write:app",
+                        "read:app"
+                    ]
+                }
+            }
+        },
+        "/transaction/{uuid}": {
+            "get": {
+                "tags": [
+                    "Transactions"
+                ],
+                "summary": "Transactions",
+                "description": "Transaction endpoints",
+                "parameters": [
+                    {
+                        "name": "Uuid",
+                        "in": "path",
+                        "description": "Transaction uuid",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "$ref": "#/definitions/Transaction"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Resource Not Found"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    }
+                },
+                "security": {
+                    "oauth2_security_example": [
+                        "write:app",
+                        "read:app"
+                    ]
+                }
+            }
+        }
+    },
+    "definitions": {
+        "RegisterRequest": {
+            "properties": {
+                "name": {
+                    "description": "//Authentication endpoints",
+                    "type": "string"
+                },
+                "email": {
+                    "description": "//Authentication endpoints",
+                    "type": "string"
+                },
+                "password": {
+                    "description": "//Authentication endpoints",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "RegisterResponse": {
+            "properties": {
+                "success": {
+                    "description": "//Authentication endpoints",
+                    "type": "boolean"
+                },
+                "access_token": {
+                    "description": "//Authentication endpoints",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "LoginRequest": {
+            "properties": {
+                "email": {
+                    "description": "//Authentication endpoints",
+                    "type": "string"
+                },
+                "password": {
+                    "description": "//Authentication endpoints",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "LoginResponse": {
+            "properties": {
+                "success": {
+                    "description": "//Authentication endpoints",
+                    "type": "boolean"
+                },
+                "access_token": {
+                    "description": "//Authentication endpoints",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "CreateTransactionRequest": {
+            "properties": {
+                "uuid": {
+                    "description": "//Authentication endpoints",
+                    "type": "string"
+                },
+                "amount": {
+                    "description": "//Authentication endpoints",
+                    "type": "integer"
+                },
+                "booking_date": {
+                    "description": "//Authentication endpoints",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "parts": {
+                    "description": "//Authentication endpoints",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "$ref": "#/definitions/TransactionPart"
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "CreateTransactionResponse": {
+            "properties": {
+                "success": {
+                    "description": "//Authentication endpoints",
+                    "type": "boolean"
+                }
+            },
+            "type": "object"
+        },
+        "Transaction": {
+            "properties": {
+                "amount": {
+                    "description": "//Authentication endpoints",
+                    "type": "integer"
+                },
+                "booking_date": {
+                    "description": "//Authentication endpoints",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "parts": {
+                    "description": "//Authentication endpoints",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "$ref": "#/definitions/TransactionPart"
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "TransactionPart": {
+            "properties": {
+                "reason": {
+                    "description": "//Authentication endpoints",
+                    "type": "string"
+                },
+                "amount": {
+                    "description": "//Authentication endpoints",
+                    "type": "integer"
+                }
+            },
+            "type": "object"
+        }
+    }
+}
