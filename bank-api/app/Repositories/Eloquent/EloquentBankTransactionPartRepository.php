@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Eloquent;
 
+use App\BankTransaction;
 use App\BankTransactionPart;
 use App\Repositories\Contracts\BankTransactionPartRepository;
 
@@ -12,5 +13,10 @@ class EloquentBankTransactionPartRepository extends AbstractRepository implement
     public function entity()
     {
         return BankTransactionPart::class;
+    }
+
+    public function insert($parts, $transaction)
+    {
+        return $transaction->bankTransactionParts()->createMany($parts);
     }
 }

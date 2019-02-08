@@ -17,6 +17,7 @@ class UserController extends Controller
 
     public function register(RegisterRequest $request) {
         $response = [
+            'success' => false,
             'error' => "Failed",
         ];
 
@@ -42,7 +43,7 @@ class UserController extends Controller
             $token = auth()->user()->createToken('Personal Access Token')->accessToken;
 
             return response()->json([
-                'error' => '',
+                'success' => true,
                 'access_token' => $token,
             ], 200);
         }
@@ -52,8 +53,7 @@ class UserController extends Controller
 
     public function login(Request $request) {
         $response = [
-            'error' => null,
-            'successful' => false,
+            'success' => false,
             'access_token' => null,
         ];
 
@@ -63,16 +63,14 @@ class UserController extends Controller
         ];
 
         if (!auth()->attempt($credentials)) {
-            $response['error'] = 'Unauthorized';
-            $response['successful'] = false;
+            $response['success'] = false;
             return response()->json($response, 401);
         }
 
         $token = auth()->user()->createToken('Personal Access Token')->accessToken;
 
         return response()->json([
-            'error' => '',
-            'successful' => true,
+            'success' => true,
             'access_token' => $token,
         ], 200);
     }

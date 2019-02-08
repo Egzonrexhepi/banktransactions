@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\BankTransaction;
 use App\BankTransactionPart;
+use App\Repositories\Contracts\BankTransactionPartRepository;
+use App\Repositories\Contracts\BankTransactionRepository;
 use App\Repositories\Contracts\UserRepository;
 use App\Repositories\Eloquent\EloquentBankTransactionPartRepository;
 use App\Repositories\Eloquent\EloquentBankTransactionRepository;
@@ -20,8 +22,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(BankTransaction::class, EloquentBankTransactionRepository::class);
-        $this->app->bind(BankTransactionPart::class, EloquentBankTransactionPartRepository::class);
+        $this->app->bind(BankTransactionRepository::class, EloquentBankTransactionRepository::class);
+        $this->app->bind(BankTransactionPartRepository::class, EloquentBankTransactionPartRepository::class);
         $this->app->bind(UserRepository::class, EloquentUserRepository::class);
     }
 

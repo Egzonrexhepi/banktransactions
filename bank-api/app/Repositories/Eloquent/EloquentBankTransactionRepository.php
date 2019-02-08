@@ -13,4 +13,14 @@ class EloquentBankTransactionRepository extends AbstractRepository implements Ba
     {
         return BankTransaction::class;
     }
+
+    public function insert($transaction)
+    {
+        return BankTransaction::create($transaction);
+    }
+
+    public function getByUuid($uuid)
+    {
+        return BankTransaction::where('uuid',$uuid)->first();
+    }
 }

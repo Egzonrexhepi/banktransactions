@@ -26,7 +26,7 @@ class CreateBankTransactionPartForeignKeys extends Migration
     public function down()
     {
         Schema::table('bank_transaction_part', function (Blueprint $table) {
-            $table->dropForeign('bank_transaction_part_bank_transaction_id');
+            $table->dropForeign('bank_transaction_part_bank_transaction_id_foreign');
         });
     }
 }

@@ -16,6 +16,8 @@ use Illuminate\Http\Request;
 Route::post('authenticate', 'UserController@login');
 Route::post('register', 'UserController@register');
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:api')->group(function () {
+    Route::post('transaction','BankTransactionController@create');
+    Route::get('transaction/{uuid}', 'BankTransactionController@getTransactionData');
 });
+

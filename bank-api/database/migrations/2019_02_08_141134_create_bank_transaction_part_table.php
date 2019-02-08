@@ -16,7 +16,7 @@ class CreateBankTransactionPartTable extends Migration
         Schema::create('bank_transaction_part', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('bank_transaction_id');
-            $table->decimal('ammount');
+            $table->decimal('amount');
             $table->string('reason');
             $table->timestamps();
         });
